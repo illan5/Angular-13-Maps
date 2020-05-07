@@ -1,0 +1,28 @@
+
+
+<mat-card>
+        <mat-card-title>Mapa</mat-card-title>
+        <mat-card-content>
+
+                <google-map (mapClick)="click($event)"
+                            height="500px"
+                            width="100%"
+                            [zoom]="zoom"
+                            [center]="center"
+                            [options]="options">
+                    
+                    <map-marker
+                            *ngFor="let marker of markers"
+                            [position]="marker.position"
+                            [label]="marker.label"
+                            [title]="marker.title"
+                            [options]="marker.options"
+                            >
+                    </map-marker>
+                </google-map>
+
+        </mat-card-content>
+
+        <button (click)="addMarker()">Add marker</button>
+
+</mat-card>

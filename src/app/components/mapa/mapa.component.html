@@ -12,6 +12,7 @@
                             [options]="options">
                     
                     <map-marker
+                            #markerElem
                             *ngFor="let marker of markers"
                             [position]="marker.position"
                             [label]="marker.label"
@@ -19,6 +20,7 @@
                             [options]="marker.options"
                             >
                     </map-marker>
+                    <map-info-window>{{ infoContent }}</map-info-window>
                 </google-map>
 
         </mat-card-content>

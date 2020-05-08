@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+
 
 @Component({
   selector: 'app-mapa',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mapa.component.css']
 })
 export class MapaComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+  @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
 
   public zoom = 12;
   center: google.maps.LatLngLiteral;
@@ -17,7 +21,8 @@ export class MapaComponent implements OnInit {
             maxZoom: 15,
             minZoom: 8,
   };
-  public markers = [];
+  markers = [];
+  infoContent = '';
 
   constructor() { }
 
@@ -47,8 +52,12 @@ export class MapaComponent implements OnInit {
       title: 'Marker title ' + (this.markers.length + 1),
       options: { animation: google.maps.Animation.BOUNCE },
     });
-    
     console.log(this.markers);
+  }
+
+  openInfo(marker: MapMarker, content) {
+    this.infoContent = content
+    this.info.open(marker)
   }
 
 }
